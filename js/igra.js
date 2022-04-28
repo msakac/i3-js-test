@@ -31,12 +31,27 @@ prikaziPitanjeIOdgovore(1)
 
 //Dohvacam sve kreirane slajdove i kreiram slušače
 slajdovi = Array.from(document.querySelectorAll('#slajd'))
+prethodniSlajd = -1
 slajdovi.forEach(slajd=>{
+    console.log(prethodniSlajd)
     slajd.addEventListener('click', e=>{
-        console.log(slajd.innerHTML)
-        prikaziPitanjeIOdgovore(slajd.innerHTML)
+        if(prethodniSlajd != slajd.innerHTML){
+            prikaziPitanjeIOdgovore(slajd.innerHTML)
+            slajd.style = "background: #424242;font-size: 2.8rem;transform: translateX(20%);"
+            obrisiStyleSaPrethodnogSlajda(prethodniSlajd)
+        }
+        prethodniSlajd = slajd.innerHTML
+        
     })
 })
+ //Kad kliknem na novi slajd, obrise se stajl sa gumba koji je slajda koji je bil prije njega
+function obrisiStyleSaPrethodnogSlajda(prethodniSlajd){
+    slajdovi.forEach(slajd=>{
+        if(slajd.innerHTML == prethodniSlajd){
+            slajd.style = ""
+        }
+    })
+}
 
 //Funkcija koja prikazuje pitanje i odgovore na njih
 //TO DO nakon kaj se jemput generiraju odgovori ostavim ih kakvi jesu
