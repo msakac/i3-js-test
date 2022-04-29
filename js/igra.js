@@ -5,6 +5,8 @@ const odgovoriLijevo = document.querySelector('.odgovori-lijevo')
 const odgovoriDesno = document.querySelector('.odgovori-desno')
 const btnPrethodni = document.querySelector('#btn-prethodni')
 const btnSljedeci = document.querySelector('#btn-sljedeci')
+const btnZavrsi = document.querySelector('#btn-zavrsi')
+btnZavrsi.style.display = "none"
 
 let pitanja = [
     {
@@ -52,16 +54,15 @@ slajdovi.forEach(slajd=>{
 function obrisiStyleSaPrethodnogSlajda(prethodniSlajd){
     slajdovi.forEach(slajd=>{
         if(slajd.innerHTML == prethodniSlajd){
-            slajd.style = ""
+            dict[prethodniSlajd] == null || dict[prethodniSlajd].length == 0 ? slajd.style = "" : slajd.style = "background: #007FFF;"
+            
         }
     })
 }
 
 function promijeniPitanje(slajd){
-    console.log("Prethodni slajd: " + prethodniSlajd)
     if(prethodniSlajd != slajd.innerHTML){
         trenutniSlajd = slajd.innerHTML
-        console.log("Trenutni slajd: "+ trenutniSlajd)
         prikaziPitanjeIOdgovore(slajd.innerHTML)
         obrisiStyleSaPrethodnogSlajda(prethodniSlajd)
     }
@@ -84,13 +85,31 @@ function prikaziPitanjeIOdgovore(rbPitanja){
             odgovoriDesno.innerHTML += `<a id="odgovor" class ="o-desno">${index + 1}</a>`
         }
     }
-    rbPitanja == 1 ? btnPrethodni.style.visibility = 'hidden' : btnPrethodni.style.visibility = 'visible'
-    rbPitanja == 4 ? btnSljedeci.style.visibility = 'hidden' : btnSljedeci.style.visibility = 'visible'
+    azurirajGumbe(rbPitanja)
 
     KreirajSlusaceZaOdgovore()
     provjeriOdabraneOdgovore()
 }
 
+
+function azurirajGumbe(rbPitanja){
+    rbPitanja == 1 ? btnPrethodni.style.visibility = 'hidden' : btnPrethodni.style.visibility = 'visible'
+    if(rbPitanja == 4) {
+        btnSljedeci.style.display = 'none'
+        btnZavrsi.style.display = 'inline'
+        pitanjaOdgovorena = true
+        slajdovi.forEach(el=>{
+            if(dict[el.innerHTML] == null || dict[el.innerHTML].length == 0){
+                pitanjaOdgovorena = false
+                btnZavrsi.style = "background: #424242;pointer-events: none;"
+            }
+        });
+        pitanjaOdgovorena ? btnZavrsi.style = "background: #007FFF;pointer-events: all;" : btnZavrsi.style = "background: #424242;pointer-events: none;"
+    }else{
+        btnSljedeci.style.display = 'inline'
+        btnZavrsi.style.display = 'none'
+    }
+}
 //Funkcija za dobivanje random broja
 function generirajBroj(){
     min = Math.ceil(2);
@@ -111,7 +130,6 @@ function izmjesajListu(){
 //button sljedeci
 btnSljedeci.addEventListener('click', e=>{
     let sljedeciSlajd = parseInt(trenutniSlajd) + 1;
-    console.log("Sljedeci slajd: " + sljedeciSlajd)
     slajdovi.forEach(element => {
         if(element.innerHTML == sljedeciSlajd){
             promijeniPitanje(element)
@@ -122,7 +140,6 @@ btnSljedeci.addEventListener('click', e=>{
 //button prethodni
 btnPrethodni.addEventListener('click', e=>{
     let prethodniSlajd = parseInt(trenutniSlajd) - 1;
-    console.log("Rikverc slajd: " + prethodniSlajd)
     slajdovi.forEach(element => {
         if(element.innerHTML == prethodniSlajd){
             promijeniPitanje(element)
@@ -147,23 +164,26 @@ function dodajOdabraniOdgovor(odgovor){
     //Ako odgovor nije odabran
     if(dict[trenutniSlajd].find(element => element == odgovor.innerHTML) === undefined){
         //Provjera kolko je odgovora odabrano do sad
-        console.log(dict[trenutniSlajd].length)
         if(dict[trenutniSlajd].length >= parseInt(trenutniSlajd)+2){
-            console.log("Dosegnut maksimalni broj odgovora")
-            //TO DO prikazi alert message
+            const porukaUpozorenja = document.querySelector('.modal')
+            porukaUpozorenja.style.display = "block"
+            setTimeout(function(){
+                porukaUpozorenja.style.display = "none"
+            }, 3000)
+            
         }else{
             dict[trenutniSlajd].push(odgovor.innerHTML)
+
             odgovor.style = "background: rgba(228,155,15, 0.8)"
         }
         
     }else{
         //Ako vec postoji odgovor onda ga obrisem iz liste i promjenim style
-        console.log("Odgovor vec postoji")
         index = dict[trenutniSlajd].indexOf(odgovor.innerHTML)
         dict[trenutniSlajd].splice(index,1)
         odgovor.style = "background: #673AB7"
     }
-    console.log("Pitanje " + trenutniSlajd + " Odgovori "+  dict[trenutniSlajd])
+    azurirajGumbe(trenutniSlajd)
 
 }
  function provjeriOdabraneOdgovore(){
