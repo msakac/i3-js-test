@@ -82,11 +82,51 @@ h2{
 .fa-solid{
     margin-left: 2rem;
     font-size: 2.7rem;
-    color: #fff
+    color: green
 }
 
+/*7680p - 8K*/
+@media screen and (max-width: 7680px){
+    *{
+        font-size: 200%;
+    }
+}
 
+/*3840- 4K*/
+@media screen and (max-width: 3840px){
+    *{
+        font-size: 150%;
+    }
+}
 
+/*1440p - 2K*/
+@media screen and (max-width: 2560px){
+    *{
+        font-size: 100%;
+    }
+}
+/*1080p*/
+@media screen and (max-width: 1920px){
+    *{
+        font-size: 70%;
+    }
+}
+
+/*720p*/
+@media screen and (max-width: 1280px){
+    *{
+        font-size: 55%;
+    }
+}
+
+/*Mobilni zaslon*/
+@media screen and (max-width: 768px){
+    *{
+        font-size: 40%;
+    }
+}
+
+/*
 @media screen and (max-width: 768px){
     .flex-column{
         padding: 2rem;
@@ -108,3 +148,5 @@ h2{
         box-shadow: 0.2rem 0.2rem 0.2rem rgba(81, 45, 168, 0.6);
     }
 }
+*/
+

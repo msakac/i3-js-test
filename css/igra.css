@@ -98,6 +98,7 @@ h2{
 
 .flex-column{
   padding: 2rem;
+  background: rgba(255, 255, 255);
 }
 .odgovori-lijevo{ 
   grid-area: lijevo;
@@ -137,14 +138,20 @@ h2{
   width: 6rem;
   height: 6rem;
   line-height:6rem;
-  padding-right: 1.7rem;
-  padding-top: 0.3rem;
   background: #424242;
   color: #ffffff;
   cursor: pointer;
   border-radius: 50%;
   transition: 200ms;
+  
 }
+
+#gumbIkona{
+  padding-right: 2rem;
+  padding-top: 1.7rem;
+  vertical-align: bottom;
+}
+
 .btn-rounded:hover{
   cursor: pointer;
   box-shadow: 0.4rem 0.4rem 0.4rem rgba(81, 45, 168, 0.6);
@@ -179,4 +186,42 @@ h2{
   width: fit-content;
 }
 
+/*7680p - 8K*/
+@media screen and (max-width: 7680px){
+  .btn-rounded {
+    line-height: 0rem;
+    
+  }
+  #gumbIkona{
+    vertical-align: bottom;
+  }
+}
 
+/*3840- 4K*/
+@media screen and (max-width: 3840px){
+  .btn-rounded {
+    line-height: 0rem;
+    
+  }
+  #gumbIkona{
+    padding-top: 1.55rem;
+  }
+}
+
+/*1440p - 2K*/
+@media screen and (max-width: 2560px){
+  .btn-rounded {
+    line-height: 0rem;
+    
+  }
+  #gumbIkona{
+    padding-top: 1.55rem;
+  }
+}
+
+/*Mobilni zaslon*/
+@media screen and (max-width: 768px){
+  *{
+      font-size: 40%;
+  }
+}

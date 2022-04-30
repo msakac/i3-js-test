@@ -71,7 +71,6 @@ function promijeniPitanje(slajd){
 }
 
 //Funkcija koja prikazuje pitanje i odgovore na njih
-//TO DO nakon kaj se jemput generiraju odgovori ostavim ih kakvi jesu
 function prikaziPitanjeIOdgovore(rbPitanja){
     odgovoriLijevo.innerHTML = ""
     odgovoriDesno.innerHTML = ""
@@ -90,7 +89,7 @@ function prikaziPitanjeIOdgovore(rbPitanja){
     provjeriOdabraneOdgovore()
 }
 
-
+//Funkcija prilikom prelaska na slajd provjerava stanje za svaki gumb
 function azurirajGumbe(rbPitanja){
     rbPitanja == 1 ? btnPrethodni.style.visibility = 'hidden' : btnPrethodni.style.visibility = 'visible'
     if(rbPitanja == 4) {
@@ -185,6 +184,7 @@ function dodajOdabraniOdgovor(odgovor){
     azurirajGumbe(trenutniSlajd)
 
 }
+//Funkcija prilikom otvaranja slajda provjerava da li je koji odgovor na tom slajdu prethodno odabran
  function provjeriOdabraneOdgovore(){
      if(dict[trenutniSlajd] != null){
         listaOdgovora.forEach(gumbOdgovora => {
@@ -195,7 +195,7 @@ function dodajOdabraniOdgovor(odgovor){
     }
  }
 
- // 
+ //Click slušač za gumb zavsi koji sprema JSON podatke u local storage te preusmjerava na rezultat.html
  btnZavrsi.addEventListener('click', e=>{
      localStorage.setItem('odgovori', JSON.stringify(dict))
      window.location.replace("rezultat.html")
