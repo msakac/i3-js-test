@@ -59,7 +59,6 @@ function obrisiStyleSaPrethodnogSlajda(prethodniSlajd){
         }
     })
 }
-
 function promijeniPitanje(slajd){
     if(prethodniSlajd != slajd.innerHTML){
         trenutniSlajd = slajd.innerHTML
@@ -195,6 +194,12 @@ function dodajOdabraniOdgovor(odgovor){
         });
     }
  }
+
+ // 
+ btnZavrsi.addEventListener('click', e=>{
+     localStorage.setItem('odgovori', JSON.stringify(dict))
+     window.location.replace("rezultat.html")
+ })
 
 
 

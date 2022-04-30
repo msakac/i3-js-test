@@ -1,21 +1,8 @@
-const slajdovi = document.getElementById('slajdovi')
+const odgovori = JSON.parse(window.localStorage.getItem('odgovori'))
+const odgovoriContainer = document.querySelector('.odgovori')
 
-let pitanja = [
-    {
-        pitanje: "Ovo je prvo pitanje"
-    },
-    {
-        pitanje:"Ovo je drugo pitanje"
-    },
-    {
-        pitanje:"Ovo je trece pitanje"
-    },
-    {
-        pitanje:"Ovo je cetvrto pitanje"
-    }
-]
 
-pitanja.forEach(function dodajSlajdove(element, index) {
-    slajdovi.appendChild(`<a id="slajd">${index++}</a>`)
-});
-
+for (const [key,value] of Object.entries(odgovori)){
+    console.log(key, value)
+    odgovoriContainer.innerHTML += `<h2>Pitanje ${key}: ${value}<h2>`
+}

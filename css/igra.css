@@ -98,7 +98,6 @@ h2{
 
 .flex-column{
   padding: 2rem;
-  background: rgba(255, 255, 255);
 }
 .odgovori-lijevo{ 
   grid-area: lijevo;
